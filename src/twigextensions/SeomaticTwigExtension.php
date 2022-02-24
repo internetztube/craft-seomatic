@@ -35,30 +35,30 @@ class SeomaticTwigExtension extends AbstractExtension implements GlobalsInterfac
      */
     public function getGlobals(): array
     {
-        $request = Craft::$app->getRequest();
-        // Seomatic::$view->getIsRenderingPageTemplate() &&
-        if (!Seomatic::$seomaticVariable && !Seomatic::$previewingMetaContainers) {
-            // Create our variable and stash it in the plugin for global access
-            Seomatic::$seomaticVariable = new SeomaticVariable();
-            // Get the path for the current request
-            $requestPath = '/';
-            if (!$request->getIsConsoleRequest()) {
-                try {
-                    $requestPath = $request->getPathInfo();
-                } catch (InvalidConfigException $e) {
-                    Craft::error($e->getMessage(), __METHOD__);
-                }
-            }
-            if (!$request->getIsCpRequest()) {
-                // Load the meta containers for this page
-                Seomatic::$plugin->metaContainers->loadMetaContainers($requestPath, null);
-            } else {
-                // If this is a CP request, load the bare minimum, which is the global container,
-                // and re-init the SEOmatic variable to ensure it points to the new settings
-                Seomatic::$plugin->metaContainers->loadGlobalMetaContainers();
-                Seomatic::$seomaticVariable->init();
-            }
-        }
+//        $request = Craft::$app->getRequest();
+//        // Seomatic::$view->getIsRenderingPageTemplate() &&
+//        if (!Seomatic::$seomaticVariable && !Seomatic::$previewingMetaContainers) {
+//            // Create our variable and stash it in the plugin for global access
+//            Seomatic::$seomaticVariable = new SeomaticVariable();
+//            // Get the path for the current request
+//            $requestPath = '/';
+//            if (!$request->getIsConsoleRequest()) {
+//                try {
+//                    $requestPath = $request->getPathInfo();
+//                } catch (InvalidConfigException $e) {
+//                    Craft::error($e->getMessage(), __METHOD__);
+//                }
+//            }
+//            if (!$request->getIsCpRequest()) {
+//                // Load the meta containers for this page
+//                Seomatic::$plugin->metaContainers->loadMetaContainers($requestPath, null);
+//            } else {
+//                // If this is a CP request, load the bare minimum, which is the global container,
+//                // and re-init the SEOmatic variable to ensure it points to the new settings
+//                Seomatic::$plugin->metaContainers->loadGlobalMetaContainers();
+//                Seomatic::$seomaticVariable->init();
+//            }
+//        }
 
         return ['seomatic' => Seomatic::$seomaticVariable];
     }
